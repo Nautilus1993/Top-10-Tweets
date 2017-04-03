@@ -11,10 +11,12 @@ public class Bootstrap {
     private static final int PORT = System.getenv("OPENSHIFT_DIY_IP") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_IP")) : 8080;
 
     public static void main(String[] args) throws Exception {
-        setIpAddress(IP_ADDRESS);
-        setPort(PORT);
-        staticFileLocation("/public");
-        new TodoResource(new TodoService(mongo()));
+//        setIpAddress(IP_ADDRESS);
+//        setPort(PORT);
+//        staticFileLocation("/public");
+//        new TodoResource(new TodoService(mongo()));
+        Collector col = new Collector("realDonaldTrump");
+        col.getTweets();
     }
 
     private static DB mongo() throws Exception {
