@@ -37,9 +37,9 @@ Here the problem is how to define "representative"? What kind of tweet can mostl
 
 #### Model 1: Favorite & Retweet Amount-based:
  
-> tweets with higher "likes" number and "retweet" number.
+> tweets with higher "likes" and "retweets" amount.
 
-I choose "like" and "retweet" as a representative features based on the following assumptions:
+I select "like" and "retweet" amount as a representative features based on the following tuitive assumptions:
 
 
 + The input data is user's original tweets (not just copy or retweet from somewhere else). 
@@ -49,12 +49,12 @@ I choose "like" and "retweet" as a representative features based on the followin
 
 #### Model 2: Tweet text content - based
 
-> There is some representative words always appear in a user's tweets. 
+> Representative words always appear in a user's representative tweets. Here we simply use word frequency to measure the representativeness of a word. 
 
 This model considers the following assumption:  
 
 + A user with constant personality usually have obvious tendency on using some words instead of others. 
-+ A word with high frequency of user's tweets usually represent user's self-evaluation or opinions on what he really cares about.
++ A word with high frequency of user's tweets usually representa user's self-evaluation,  or issues what he really cares about.
 
 
 ## Part II. Implementation
@@ -76,7 +76,6 @@ Then the data what I really concerns are:
 ```
 
 ### Representativeness
-
 
 
 #### Model 1: Favorite & Retweet amount-based
