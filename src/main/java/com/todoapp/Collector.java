@@ -2,6 +2,8 @@ package com.todoapp;
 
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,7 +23,7 @@ public class Collector {
     }
 
 
-    public void getTweets(){
+    public List<TweetUnit> getTweets(){
         ConfigurationBuilder config = new ConfigurationBuilder();
         config.setDebugEnabled(true);
         config.setOAuthAccessToken(accessToken);
@@ -31,17 +33,27 @@ public class Collector {
         TwitterFactory tf = new TwitterFactory(config.build());
         Twitter twitter = tf.getInstance();
 
+        List<TweetUnit> datas = new ArrayList<>();
         try {
             List<Status> statuses = twitter.getUserTimeline(username);
             System.out.println("Showing @" + username + "'s home timeline") ;
             for (Status status: statuses){
-                System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
+//                System.out.println("@" + status.getUser().getScreenName() + " - "
+//                        + " Favorated number: " + Integer.toString(status.getRetweetCount()) + " - "
+//                        + " Retweeted number: " + Integer.toString(status.getFavoriteCount()) + " - "
+//                        + "\n - " + status.getText());
+                TweetUnit tweet = new TweetUnit(
+                        status.getUser().getScreenName(),
+                        status.getFavoriteCount(),
+                        status.getRetweetCount(),
+                        status.getText());
+                datas.add(tweet);
             }
         } catch (TwitterException e) {
             e.printStackTrace();
             System.out.println("Failed to get timeline:" + e.getMessage());
             System.exit(-1);
         }
-
+        return datas;
     }
 }

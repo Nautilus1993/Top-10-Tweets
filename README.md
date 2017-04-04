@@ -1,8 +1,6 @@
 # juji hw
 
-The deadline is April 4th. This is a working log to record what I did and what problems I met.
-
-## day1: Design
+## Part I: Requirements analysis
 
 >"Representative Tweets"
 >
@@ -21,12 +19,12 @@ The deadline is April 4th. This is a working log to record what I did and what p
 
 possible tools: spark java as website framework. MongoDB as database.
 
-Here is what happens on our server, between user input twitter account and see his top-10 representative:
+Here is what happens on our server, since user input a twitter account, until see his top-10 representative tweets:
 
 1. server received a twitter username.
 2. server use some twitter API to download this user's most recent 1000 twitters.
-3. server got the data and send them into a **"Representativeness Ranker"** so the tweets text will be sorted by some ranking algorithm which I will discuss later.
-4. server stores the top-10 representative tweets into local DB, also send back this computing result to a user.
+3. server got the data and send them into a **"Representativeness Ranker"** so the tweets will be sorted by some ranking algorithm which I will discuss later.
+4. server stores the top-10 representative tweets into local DB, also send back this computing result to browser.
 
 ### Representative Ranker
 (Just an example)
@@ -37,9 +35,11 @@ Here is what happens on our server, between user input twitter account and see h
 
 Here the problem is how to define "representative"? What kind of tweet can mostly represent a user's personality or features?
 
->1. tweets with higher "likes" number and "retweet" number.
+#### Model 1: Favorite & Retweet Amount-based:
+ 
+> tweets with higher "likes" number and "retweet" number.
 
-I choose "like" and "retweet" as a representative feature based on the following assumptions:
+I choose "like" and "retweet" as a representative features based on the following assumptions:
 
 
 + The input data is user's original tweets (not just copy or retweet from somewhere else). 
@@ -47,42 +47,53 @@ I choose "like" and "retweet" as a representative feature based on the following
 + Followers follow this user usually because they appreciate his personality or features.
 + Most "like" and "retweet" are from user's direct followers, or followers' followers within 2 connections.
 
+#### Model 2: Tweet text content - based
 
->2. tweet with higher "like" and "retweet" from mutual connections.
+> There is some representative words always appear in a user's tweets. 
 
-Also this aspect considers the following assumption: 
+This model considers the following assumption:  
 
-+ 2 users follow each other usually because they share similar personality or interests. 
++ A user with constant personality usually have obvious tendency on using some words instead of others. 
++ A word with high frequency of user's tweets usually represent user's self-evaluation or opinions on what he really cares about.
 
-Thus I believe that "likes" and "retweet" from mutual connections will be more representative. When ranker computing a score, I will add more weights on this case.
 
-Here is an example:
+## Part II. Implementation
 
-User A has a tweet, which has been liked by 300 times, retweeted by 500 times. Also the like and retweet number from mutual connection is 20 and 40. Thus for this tweet, ranker can compute a score in such a way:
+
+### Data format 
+
+The data get from twitter is formated as @username - favorate - Retweet - Tweet text:
+
+For example if a twitter looks like this:
+
+![](./tweet.jpg)
+
+Then the data what I really concerns are: 
 
 ```
-score(tweet) = (300 + 20) / 300 * w1 + (500 + 40) / 500 * w2
+@realDonaldTrump -  Favorated number: 21621 -  Retweeted number: 82846 - 
+ - Did Hillary Clinton ever apologize for receiving the answers to the debate? Just asking!
 ```
 
+### Representativeness
 
-### A Plan
 
-Iteration 1: Understand the problem. Analysis product features and core modules.
 
-Iteration 2: data collector module to obtain data from twitter. 
+#### Model 1: Favorite & Retweet amount-based
 
-Iteration 3: Representative Ranker implement.
+1. Collect user's most recent 300 tweets.
+2. Sort them based on favorite number and retweet number.
+3. Return top-10 tweets as response and display at browser side. (I am working on here)
+4. Add the top-10 into database. 
 
-Iteration 4: website framework. UI design + DB + server
 
-Iteration 5: Deploy & Test.
 
-### Report Today
+#### Model 2: Tweet text-based
 
-Web site framework was done, Frond-end and back-end could communicate. 
+##Part III: Deployment & Test
 
-Deployment does not work. 
 
-## Day 2
 
-Today's task is get data from twitter. Server send a username into twitter API, the response is this user's most recent tweets, which should be stored in mongoDB.
+
+
+

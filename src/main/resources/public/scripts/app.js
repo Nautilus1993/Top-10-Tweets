@@ -41,8 +41,13 @@ app.controller('CreateCtrl', function ($scope, $http, $location) {
 
     $scope.createTodo = function () {
         console.log($scope.todo);
-        $http.post('/api/v1/todos', $scope.todo).success(function (data) {
-            $location.path('/');
+        // $http.post('/api/v1/todos', $scope.todo).success(function (data) {
+        //     $location.path('/');
+        // }).error(function (data, status) {
+        //     console.log('Error ' + data)
+        // })
+        $http.get('representative/' + todo.username).success(function (data) {
+            $scope.todos = data;
         }).error(function (data, status) {
             console.log('Error ' + data)
         })
