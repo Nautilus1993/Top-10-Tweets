@@ -68,7 +68,7 @@ For example if a twitter looks like this:
 
 ![](./tweet.jpg)
 
-Then the data what I really concerns are: 
+Then the data what I really concern is: 
 
 ```
 @realDonaldTrump -  Favorated number: 21621 -  Retweeted number: 82846 - 
