@@ -81,7 +81,7 @@ Then the data what I really concerns are:
 #### Model 1: Favorite & Retweet amount-based
 
 1. Collect user's most recent 300 tweets.
-2. Sort them based on favorite number and retweet number.
+2. Sort them based on favorite number and retweet number. [Ranker 1](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/todoapp/Ranker1.java)
 3. Return top-10 tweets as response and display at browser side. (I am working on here)
 4. Add the top-10 into database. 
 
