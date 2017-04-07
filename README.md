@@ -77,19 +77,56 @@ Then the data what I really concern is:
 
 ### Representativeness
 
+First collect user's most recent 300 tweets from twitter API. [Collector.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Data/Collector.java)
 
 #### Model 1: Favorite & Retweet amount-based
 
-1. Collect user's most recent 300 tweets.
-2. Sort them based on favorite number and retweet number. [Ranker 1](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/todoapp/Ranker1.java)
-3. Return top-10 tweets as response and display at browser side. (I am working on here)
-4. Add the top-10 into database. 
+1. Sort them based on favorite number and retweet number. [Ranker1.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Ranker/Ranker1.java)
+2. Return top-10 tweets as response and display at browser side. 
+3. Add the top-10 into database. 
 
 
 
 #### Model 2: Tweet text-based
 
-##Part III: Deployment & Test
+1. Append all tweets text content into a document.
+2. Tokenize, remove stopwords, and stemming documents, finally extract "Top-K" key words (Apache lucene).[KeyWord.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Data/KeyWord.java)
+
+	To test the performance of KeyWordExtractor, here is a key words extraction test on given text document [RFC 793 Part 1&2](https://tools.ietf.org/html/rfc793) 
+	
+	```
+	Keyword Number : 591  Text Length: 26810
+	
+	introduct
+	transmiss
+	control
+	protocol
+	tcp
+	intend
+	us
+	highli
+	reliabl
+	between
+	host
+	comput
+	commun
+	network
+	interconnect
+	system
+	document
+	describ
+	function
+	perform
+	program
+	implement
+	``` 
+	
+	From the extracted key word, this document is easy to be represented as: "Introduction of reliable transmission protocol in network system communication." So I believe it is resonable to use **text key words** to represent tweets. In other word, if a tweet contains many key words, it should be more representative than others. 
+
+3. Rank tweet based on comprehensive key words from all tweets text. To simplify this process and reduce unnecessary computation, I just use top-25 key words to training a ranker. 25 may not be an optimal number, but we can adjust it or pass as parameters when refactoring the whole project later. [Ranker2.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Ranker/Ranker2.java)
+
+
+## Part III: Deployment & Test
 
 
 
