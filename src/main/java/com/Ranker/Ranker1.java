@@ -1,11 +1,13 @@
-package com.todoapp;
+package com.Ranker;
+
+import com.Data.TweetUnit;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import static com.todoapp.Bootstrap.TOP_K;
+import static com.Server.Bootstrap.TOP_K;
 
 
 /**

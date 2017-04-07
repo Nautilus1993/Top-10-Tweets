@@ -1,3 +1,7 @@
+/**
+ * Created by shekhargulati on 10/06/14.
+ */
+
 var app = angular.module('todoapp', [
     'ngCookies',
     'ngResource',
@@ -41,13 +45,8 @@ app.controller('CreateCtrl', function ($scope, $http, $location) {
 
     $scope.createTodo = function () {
         console.log($scope.todo);
-        // $http.post('/api/v1/todos', $scope.todo).success(function (data) {
-        //     $location.path('/');
-        // }).error(function (data, status) {
-        //     console.log('Error ' + data)
-        // })
-        $http.get('representative/' + todo.username).success(function (data) {
-            $scope.todos = data;
+        $http.post('/api/v1/todos', $scope.todo).success(function (data) {
+            $location.path('/');
         }).error(function (data, status) {
             console.log('Error ' + data)
         })

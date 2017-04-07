@@ -1,4 +1,4 @@
-package com.todoapp;
+package com.Data;
 
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * This class used for collect user's ariginal data given a username.
+ * This class used for collect user's original data given a username.
  */
 public class Collector {
     String username;
@@ -38,10 +38,6 @@ public class Collector {
             List<Status> statuses = twitter.getUserTimeline(username);
             System.out.println("Showing @" + username + "'s home timeline") ;
             for (Status status: statuses){
-//                System.out.println("@" + status.getUser().getScreenName() + " - "
-//                        + " Favorated number: " + Integer.toString(status.getRetweetCount()) + " - "
-//                        + " Retweeted number: " + Integer.toString(status.getFavoriteCount()) + " - "
-//                        + "\n - " + status.getText());
                 TweetUnit tweet = new TweetUnit(
                         status.getUser().getScreenName(),
                         status.getFavoriteCount(),

@@ -1,7 +1,6 @@
-package com.todoapp;
+package com.Server;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import org.bson.types.ObjectId;
 
 import java.util.Date;

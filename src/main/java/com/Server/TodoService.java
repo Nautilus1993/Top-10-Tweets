@@ -1,11 +1,10 @@
-package com.todoapp;
+package com.Server;
 
 import com.google.gson.Gson;
 import com.mongodb.*;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class TodoService {
 
     public TodoService(DB db) {
         this.db = db;
-        this.collection = db.getCollection("todos");
+        this.collection = db.getCollection("tweets");
     }
 
     public List<Todo> findAll() {

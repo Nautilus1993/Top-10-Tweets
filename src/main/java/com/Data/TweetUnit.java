@@ -1,4 +1,4 @@
-package com.todoapp;
+package com.Data;
 
 public class TweetUnit {
     public String username;
