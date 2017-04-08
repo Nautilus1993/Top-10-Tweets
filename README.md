@@ -81,20 +81,15 @@ First collect user's most recent 300 tweets from twitter API. [Collector.java](h
 
 #### Model 1: Favorite & Retweet amount-based
 
-1. Sort them based on favorite number and retweet number. [Ranker1.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Ranker/Ranker1.java)
-2. Return top-10 tweets as response and display at browser side. 
-3. Add the top-10 into database. 
++ Sort them based on favorite number and retweet number. [Ranker1.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Ranker/Ranker1.java)
++ Return top-10 tweets as response and display at browser side. 
++ Add the top-10 into database. 
 
+#### Keyword Extractor
 
-
-#### Model 2: Tweet text-based
-
-1. Append all tweets text content into a document.
-2. Tokenize, remove stopwords, and stemming documents, finally extract "Top-K" key words (Apache lucene).[KeyWord.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Data/KeyWord.java)
-
-	To test the performance of KeyWordExtractor, here is a key words extraction test on given text document [RFC 793 Part 1&2](https://tools.ietf.org/html/rfc793) 
+Before processed to model 2, testing the performance of KeyWordExtractor, here is a key words extraction test on given text document [RFC 793 Part 1&2](https://tools.ietf.org/html/rfc793) . The input is a raw text, and output will be some key words.
 	
-	```
+```
 	Keyword Number : 591  Text Length: 26810
 	
 	introduct
@@ -119,16 +114,76 @@ First collect user's most recent 300 tweets from twitter API. [Collector.java](h
 	perform
 	program
 	implement
-	``` 
+``` 
 	
-	From the extracted key word, this document is easy to be represented as: "Introduction of reliable transmission protocol in network system communication." So I believe it is resonable to use **text key words** to represent tweets. In other word, if a tweet contains many key words, it should be more representative than others. 
+From the extracted key word, this document is easy to be represented as: "Introduction of reliable transmission protocol in network system communication." So I believe it is resonable to use **text key words** to represent tweets. In other word, if a tweet contains many key words, it should be more representative than others.
 
-3. Rank tweet based on comprehensive key words from all tweets text. To simplify this process and reduce unnecessary computation, I just use top-25 key words to training a ranker. 25 may not be an optimal number, but we can adjust it or pass as parameters when refactoring the whole project later. [Ranker2.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Ranker/Ranker2.java)
 
+#### Model 2: Tweet text-based
+
++ Append all tweets text content into a document.
++ Tokenize, remove stopwords, and stemming documents, finally extract "Top-K" key words (Apache lucene).[KeyWord.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Data/KeyWord.java) 
++ Rank tweet based on comprehensive key words from all tweets text. To simplify this process and reduce unnecessary computation, I just use top-25 key words to training a ranker. 25 may not be an optimal number, but we can adjust it or pass as parameters when refactoring the whole project later. [Ranker2.java](https://github.com/Nautilus1993/Juji-interview/blob/master/src/main/java/com/Ranker/Ranker2.java)
+
+```
+Sample Running Result: (Top-10 representative tweets based on keywords frequency)
+
+Tweet Amount: 300
+-------   Key Words @realDonaldTrump  -------
+todai
+co
+my
+great
+stori
+american
+http
+fake
+job
+big
+trump
+honor
+our
+media
+we
+veri
+countri
+russia
+have
+just
+so
+new
+presid
+make
+you
+@realDonaldTrump - Tweet Score:8
+ - content:  Today on #NationalAgDay, we honor our great American farmers & ranchers. Their hard work & dedication are ingrained… https://t.co/IpGRhly2zj
+@realDonaldTrump - Tweet Score:7
+ - content:  Today we honored our true American heroes on the first-ever National Vietnam War Veterans Day.
+#ThankAVeteran… https://t.co/deOHapcV4J
+@realDonaldTrump - Tweet Score:7
+ - content:  Don't let the FAKE NEWS tell you that there is big infighting in the Trump Admin. We are getting along great, and getting major things done!
+@realDonaldTrump - Tweet Score:7
+ - content:  '16 Fake News Stories Reporters Have Run Since Trump Won' https://t.co/0dHld5kiVc
+@realDonaldTrump - Tweet Score:6
+ - content:  Thank you Louisville, Kentucky. Together, we will MAKE AMERICA SAFE AND GREAT AGAIN! https://t.co/qGgWEWUvek
+@realDonaldTrump - Tweet Score:6
+ - content:  It is the same Fake News Media that said there is "no path to victory for Trump" that is now pushing the phony Russia story. A total scam!
+@realDonaldTrump - Tweet Score:6
+ - content:  Great news. We are only just beginning. Together, we are going to #MAGA! https://t.co/BSp685Q9Qf https://t.co/K7yeBZsf6r
+@realDonaldTrump - Tweet Score:6
+ - content:  Today, I was thrilled to announce a commitment of $25 BILLION & 20K AMERICAN JOBS over the next 4 years. THANK YOU… https://t.co/nWJ1hNmzoR
+@realDonaldTrump - Tweet Score:6
+ - content:  It was an honor to host our American heroes from the @WWP #SoldierRideDC at the @WhiteHouse today with @FLOTUS, @VP… https://t.co/u5AI1pupVV
+@realDonaldTrump - Tweet Score:6
+ - content:  We must fix our education system for our kids to Make America Great Again. Wonderful day at Saint Andrew in Orlando. https://t.co/OTJaHcvLzf
+```
 
 ## Part III: Deployment & Test
 
 
+## Part IV: Evaluation & Possible Optimization
+
+## 
 
 
 
