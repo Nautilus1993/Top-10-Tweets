@@ -17,7 +17,7 @@ public class RankerService {
         this.collection = db.getCollection("tweets");
     }
 
-    public List<TweetUnit> rank(String username){
+    public List<TweetUnit> rank1(String username){
         List<TweetUnit> top10 = new ArrayList<>();
         Collector col = new Collector(username);
         Ranker1 ranker = new Ranker1(username);
@@ -28,7 +28,7 @@ public class RankerService {
     public void rank2(String username) throws IOException {
         Collector col = new Collector(username);
         Ranker2 ranker2 = new Ranker2(username);
-        ranker2.findKeyWords(col.getTweets());
+        ranker2.findTop10(col.getTweets());
         return;
     }
 }

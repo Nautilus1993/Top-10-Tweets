@@ -22,7 +22,7 @@ public class Bootstrap {
         String username = "realDonaldTrump";
         Collector col = new Collector(username);
         Ranker2 ranker = new Ranker2(username);
-        ranker.findKeyWords(col.getTweets());
+        ranker.findTop10(col.getTweets());
     }
 
     private static DB mongo() throws Exception {

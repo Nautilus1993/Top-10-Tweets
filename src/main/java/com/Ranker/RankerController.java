@@ -3,6 +3,8 @@ package com.Ranker;
 import com.Server.JsonTransformer;
 import spark.Spark;
 
+import java.io.IOException;
+
 import static spark.route.HttpMethod.post;
 
 public class RankerController {
@@ -21,8 +23,13 @@ public class RankerController {
         }, new JsonTransformer());
 
         // return a user's top-10 representative tweets
-        Spark.get(API_CONTEXT + "/display", "application/json", (request, response) ->
-            rankerService.rank(request.params(":uname")), new JsonTransformer());
+//        Spark.get(API_CONTEXT + "/display", "application/json", (request, response) -> {
+//            try {
+//                return rankerService.rank2(request.params(":uname"));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }, new JsonTransformer());
 
     }
 }
