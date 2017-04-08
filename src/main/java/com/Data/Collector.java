@@ -34,17 +34,22 @@ public class Collector {
         Twitter twitter = tf.getInstance();
 
         List<TweetUnit> datas = new ArrayList<>();
+        // Collecting the recent 300 tweets
         try {
-            List<Status> statuses = twitter.getUserTimeline(username);
-            System.out.println("Showing @" + username + "'s home timeline") ;
-            for (Status status: statuses){
-                TweetUnit tweet = new TweetUnit(
-                        status.getUser().getScreenName(),
-                        status.getFavoriteCount(),
-                        status.getRetweetCount(),
-                        status.getText());
-                datas.add(tweet);
+            int pageno = 1;
+            while(pageno <= 10){
+                Paging page = new Paging(pageno++, 30);
+                List<Status> statuses = twitter.getUserTimeline(username, page);
+                for (Status status: statuses){
+                    TweetUnit tweet = new TweetUnit(
+                            status.getUser().getScreenName(),
+                            status.getFavoriteCount(),
+                            status.getRetweetCount(),
+                            status.getText());
+                    datas.add(tweet);
+                }
             }
+            System.out.println("Tweet Amount: " + datas.size());
         } catch (TwitterException e) {
             e.printStackTrace();
             System.out.println("Failed to get timeline:" + e.getMessage());

@@ -135,7 +135,7 @@ public class KeyWord implements Comparator<KeyWord>{
             Collections.sort(keywords, new Comparator<KeyWord>() {
                 @Override
                 public int compare(KeyWord o1, KeyWord o2) {
-                    return 0;
+                    return o2.frequency - o1.frequency;
                 }
             });
 

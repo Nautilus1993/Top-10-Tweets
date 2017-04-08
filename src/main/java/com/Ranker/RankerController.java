@@ -1,11 +1,7 @@
 package com.Ranker;
 
 import com.Server.JsonTransformer;
-import spark.Spark;
-
-import java.io.IOException;
-
-import static spark.route.HttpMethod.post;
+import static spark.Spark.*;
 
 public class RankerController {
     private static final String API_CONTEXT = "/tweet";
@@ -16,9 +12,14 @@ public class RankerController {
     }
 
     private void setupEndpoints(){
-        Spark.get(API_CONTEXT + ":uname", "application/json", (request, response) -> {
-            System.out.println("received username" + request.params(":uname"));
-            response.body("I am server");
+
+        get(API_CONTEXT + "/:uname", "application/json", (request, response) -> {
+            String uname = request.params(":uname");
+            try {
+                return rankerService.rank2(uname);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return response;
         }, new JsonTransformer());
 

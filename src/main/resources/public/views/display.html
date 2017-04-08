@@ -1,29 +1,33 @@
-<h2>All Tweets <a class="btn btn-primary pull-right" href="#/"><i
+<h2>All Tweets <a class="btn btn-primary pull-right" href="/"><i
         class="icon-plus-sign icon-white"></i> Input Username</a></h2>
 
 <table class="table table-hover">
     <tr>
         <th>
-            #
+            UserName
         </th>
         <th>
-            Display
+            Favorite
         </th>
         <th>
-            Created On
+            Retweet
         </th>
-        <th>Done</th>
+        <th>
+            Text
+        </th>
     </tr>
-    <tr class="success-{{tweet.done}}" ng-repeat="tweet in tweets">
-        <td>{{$index+1}}</td>
+    <tr class="success-{{tweet.done}}" ng-repeat = "tweet in tweets">
         <td>
-            {{tweet.uname}}
+            {{tweet.username}}
         </td>
         <td>
-            {{tweet.createdOn |date:'medium'}}
+            {{tweet.favorite}}
         </td>
         <td>
-            <input type="checkbox" ng-change="todoStatusChanged(tweet)" ng-value="tweet.done" ng-model="tweet.done">
+            {{tweet.retweet}}
+        </td>
+        <td>
+            {{tweet.text}}
         </td>
     </tr>
 </table>
