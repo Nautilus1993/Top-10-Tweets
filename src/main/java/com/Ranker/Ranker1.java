@@ -48,13 +48,6 @@ public class Ranker1 {
         while(!topK.isEmpty()){
             result.add(0, topK.poll());
         }
-
-        for (TweetUnit tu: result){
-            System.out.println("@" + tu.username
-                    + " - favorite " + Integer.toString(tu.favorite)
-                    + " - Retweet" + Integer.toString(tu.retweet)
-                    + "\n - content: " + tu.text);
-        }
         return result;
     }
 }

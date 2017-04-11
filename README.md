@@ -178,12 +178,24 @@ you
  - content:  We must fix our education system for our kids to Make America Great Again. Wonderful day at Saint Andrew in Orlando. https://t.co/OTJaHcvLzf
 ```
 
-## Part III: Deployment & Test
-
-
-## Part IV: Evaluation & Possible Optimization
+## Part III: Deployment
 
 ## 
+
+## Part IV: Some concerns
+
+### Network latency
+
+The bottleneck of responding time is server read data from twitter API. One possible solution is timestamp. Each time server only request the new posted tweets, instead of all recent tweets. I am not sure if this problem need twitter streaming API, which is used for monitoring a twitter account and update any activity, because in this scenario users' send request sparsely and randomly.
+
+### Text analysis accuracy
+
+Based on my observation, the text cleaning is not very well. Some stopword are still extracted as key words, which is actually meaningless. In Donald trump example, some key words are meaningful: honor, america, job, great, staty, countri, etc. But also some key words is
+
+### Database or not
+
+One concern about database is how frequent a user post a new tweet or delete an old one. If this activity frequently happen, that means each time computing user's representative features, we need to download all most recent data. However, if our users seldom delete old tweets and post new one like 1-2 tweets a day, then a database is useful, because we only need to calculate on the less significant new parts. 
+
 
 
 

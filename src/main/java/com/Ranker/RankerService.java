@@ -26,6 +26,7 @@ public class RankerService {
     public List<TweetUnit> rank2(String username) throws IOException {
         Collector col = new Collector(username);
         Ranker2 ranker2 = new Ranker2(username);
+        Ranker1 ranker1 = new Ranker1(username);
         return ranker2.findTop10(col.getTweets());
     }
 

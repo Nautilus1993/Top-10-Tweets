@@ -1,0 +1,27 @@
+<h2>Top-10 Tweets <a class="btn btn-primary pull-right" href="/"><i
+        class="icon-plus-sign icon-white"></i> Input Username</a></h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            UserName
+        </th>
+        <th>
+            Key Word Frequency
+        </th>
+        <th>
+            Text
+        </th>
+    </tr>
+    <tr class="success-{{tweet.done}}" ng-repeat = "tweet in tweets">
+        <td>
+            {{tweet.username}}
+        </td>
+        <td>
+            {{tweet.score}}
+        </td>
+        <td>
+            {{tweet.text}}
+        </td>
+    </tr>
+</table>

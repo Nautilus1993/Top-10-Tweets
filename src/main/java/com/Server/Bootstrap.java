@@ -17,11 +17,6 @@ public class Bootstrap {
         setIpAddress(IP_ADDRESS);
         setPort(PORT);
         staticFileLocation("/public");
-        //new TodoResource(new TodoService(mongo()));
         new RankerController(new RankerService());
-        //String username = "realDonaldTrump";
-        //Collector col = new Collector(username);
-        //Ranker2 ranker = new Ranker2(username);
-        //ranker.findTop10(col.getTweets());
     }
 }

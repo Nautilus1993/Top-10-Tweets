@@ -86,19 +86,6 @@ public class Ranker2 {
         while(!heap.isEmpty()){
             results.add(0, heap.poll());
         }
-
-        /**  Print Ranking results
-        Iterator iter = top25.iterator();
-        System.out.println("-------   Key Words @" + username + "  -------");
-        while (iter.hasNext()){
-            KeyWord kw = (KeyWord) iter.next();
-            System.out.println(kw.getStem());
-        }
-        for(TweetUnit tweetUnit: results){
-            System.out.println("@" + tweetUnit.username + " - Tweet Score:" + tweetUnit.score +
-            "\n - content:  " + tweetUnit.text);
-        }
-         */
         return results;
     }
 }

@@ -9,48 +9,66 @@ app.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl'
-    }).when('/display', {
-        templateUrl: 'views/display.html',
-        controller: 'DisplayCtrl'
+    }).when('/display1', {
+        templateUrl: 'views/display1.html',
+        controller: 'DisplayCtrl1'
+    }).when('/display2', {
+        templateUrl: 'views/display2.html',
+        controller: 'DisplayCtrl2'
     }).otherwise({
         redirectTo: '/'
     })
 });
 
-app.controller('UserCtrl', function ($scope, $http, $location) {
+app.service('tweetsService', function(){
+    var tweetsList = [];
+
+    var addTweets = function(tweets){
+        tweetsList = [];
+        tweetsList.push(tweets);
+    };
+
+    var getTweets = function(){
+        return tweetsList;
+    };
+
+    return{
+        addTweets: addTweets,
+        getTweets: getTweets
+    };
+});
+
+app.controller('UserCtrl', function ($scope, $http, $location, tweetsService) {
     $scope.tweet = {
         done: false
     };
 
-    $scope.inputUsername = function (tweet) {
-        console.log($scope.tweet);
+    $scope.ranker1 = function (tweet) {
+        console.log(tweet)
         $http.get('/tweet/' + $scope.tweet.uname, $scope.tweet).success(function (data) {
-            $scope.tweets = data;
-            $location.path('/display');
+            tweetsService.addTweets(data);
+            $location.path('/display1');
+        }).error(function (data, status) {
+            console.log('Error ' + data)
+        })
+    };
+
+    $scope.ranker2 = function (tweet) {
+        $http.get('/tweet/rank2/' + $scope.tweet.uname, $scope.tweet).success(function (data) {
+            tweetsService.addTweets(data);
+            $location.path('/display2');
         }).error(function (data, status) {
             console.log('Error ' + data)
         })
     }
 });
 
-app.controller('DisplayCtrl', function ($scope, $http) {
+app.controller('DisplayCtrl1', function ($scope, tweetsService) {
+    $scope.tweets = tweetsService.getTweets()[0];
+    console.log($scope.tweets)
+});
 
-    // $http.get('/tweet/' + $scope.tweet.uname).success(function (data) {
-    //     $scope.tweets = data;
-    // }).error(function (data, status) {
-    //     console.log('Error ' + data)
-    // })
-    // $http.get('/tweet/' + $scope.tweet.uname, $scope.tweet).success(function (data) {
-    //     $scope.tweet = data;
-    // }).error(function (data, status) {
-    //     console.log('Error ' + data)
-    // })
-    // $scope.todoStatusChanged = function (tweet) {
-    //     console.log(tweet);
-    //     $http.put('/api/v1/todos/' + tweet.id, tweet).success(function (data) {
-    //         console.log('status changed');
-    //     }).error(function (data, status) {
-    //         console.log('Error ' + data)
-    //     })
-    // }
+app.controller('DisplayCtrl2', function ($scope, tweetsService) {
+    $scope.tweets = tweetsService.getTweets()[0];
+    console.log($scope.tweets)
 });

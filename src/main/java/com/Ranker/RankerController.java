@@ -16,21 +16,21 @@ public class RankerController {
         get(API_CONTEXT + "/:uname", "application/json", (request, response) -> {
             String uname = request.params(":uname");
             try {
-                return rankerService.rank2(uname);
+                return rankerService.rank1(uname);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return response;
         }, new JsonTransformer());
 
-        // return a user's top-10 representative tweets
-//        Spark.get(API_CONTEXT + "/display", "application/json", (request, response) -> {
-//            try {
-//                return rankerService.rank2(request.params(":uname"));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }, new JsonTransformer());
-
+        get(API_CONTEXT + "/rank2/:uname", "application/json", (request, response) -> {
+            String uname = request.params(":uname");
+            try {
+                return rankerService.rank2(uname);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return response;
+        }, new JsonTransformer());
     }
 }
