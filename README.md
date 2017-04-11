@@ -66,7 +66,7 @@ The data get from twitter is formated as @username - favorate - Retweet - Tweet 
 
 For example if a twitter looks like this:
 
-![](./tweet.jpg)
+![](./img/tweet.jpg)
 
 Then the data what I really concern is: 
 
@@ -178,23 +178,35 @@ you
  - content:  We must fix our education system for our kids to Make America Great Again. Wonderful day at Saint Andrew in Orlando. https://t.co/OTJaHcvLzf
 ```
 
+#### Final Webpages
+
++ User input:
+
+![](./img/input.png)
+
++ Ranker 1: based on favorite and retweet numbers.
+![](./img/ranker1.png)
+
++ Ranker 2: based on tweet text analysis.
+![](./img/ranker2.png)
+
+
 ## Part III: Deployment
- 
+
 
 ## Part IV: Some concerns
 
 ### Network latency
 
-The bottleneck of responding time is server read data from twitter API. One possible solution is timestamp. Each time server only request the new posted tweets, instead of all recent tweets. I am not sure if this problem need twitter streaming API, which is used for monitoring a twitter account and update any activity, because in this scenario users' send request sparsely and randomly.
+The bottleneck of responding time is server read data from twitter API. One possible solution is timestamp. Each time server only request the new posted tweets, instead of all recent tweets. I am not sure if this problem need twitter streaming API, which is used for monitoring a twitter account and update any activity of this account. 
 
 ### Text analysis accuracy
 
-Based on my observation, the text cleaning is not very well. Some stopword are still extracted as key words, which is actually meaningless. In Donald trump example, some key words are meaningful: honor, america, job, great, staty, countri, etc. But also some key words is meaningless like our, yours. 
+Based on my observation, text cleaning result is not very well. Some stopword are still extracted as key words, which is actually meaningless. In Donald trump example, some key words are meaningful: honor, america, job, great, staty, countri, etc. But also some key words is meaningless like our, yours. 
 
 ### Database or not
 
-One concern about database is how frequent a user post a new tweet or delete an old one. If this activity frequently happen, that means each time computing user's representative features, we need to download all most recent data. However, if our users seldom delete old tweets and post new one like 1-2 tweets a day, then a database is useful, because we only need to calculate on the less significant new parts. 
-
+One concern about database is how frequent a user post a new tweet or delete an old one. If this kind of updating activities frequently happen, then each time computing user's representative features, we need to download all most recent data. However, if our users seldom delete old tweets and post in a low frequency, then a database is useful, because there maybe only a little new content since last time processing user's request.
 
 
 
