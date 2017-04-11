@@ -146,6 +146,7 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+
                         <configuration>
                             <transformers>
                                 <transformer
@@ -154,6 +155,7 @@
                                 </transformer>
                             </transformers>
                         </configuration>
+
                     </execution>
                 </executions>
             </plugin>
