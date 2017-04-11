@@ -179,8 +179,7 @@ you
 ```
 
 ## Part III: Deployment
-
-## 
+ 
 
 ## Part IV: Some concerns
 
@@ -190,7 +189,7 @@ The bottleneck of responding time is server read data from twitter API. One poss
 
 ### Text analysis accuracy
 
-Based on my observation, the text cleaning is not very well. Some stopword are still extracted as key words, which is actually meaningless. In Donald trump example, some key words are meaningful: honor, america, job, great, staty, countri, etc. But also some key words is
+Based on my observation, the text cleaning is not very well. Some stopword are still extracted as key words, which is actually meaningless. In Donald trump example, some key words are meaningful: honor, america, job, great, staty, countri, etc. But also some key words is meaningless like our, yours. 
 
 ### Database or not
 
