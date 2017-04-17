@@ -1,1 +1,1 @@
-web: java -jar ./target/todoapp1-1.0-SNAPSHOT.jar
+java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/*.war

@@ -1,11 +1,7 @@
 package com.Server;
 
-import com.Data.Collector;
-import com.Ranker.Ranker1;
-import com.Ranker.Ranker2;
 import com.Ranker.RankerController;
 import com.Ranker.RankerService;
-import com.mongodb.*;
 
 import static spark.SparkBase.*;
 
@@ -25,6 +21,6 @@ public class Bootstrap {
         if (processBuilder.environment().get("PORT") != null) {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
-        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+        return 5000; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 }
