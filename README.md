@@ -1,5 +1,7 @@
 # juji hw
 
+[Final Website](http://54.202.242.96:5000/#/)
+
 ## Part I: Requirements analysis
 
 >"Representative Tweets"
@@ -191,10 +193,7 @@ you
 ![](./img/ranker2.png)
 
 
-## Part III: Deployment
-
-
-## Part IV: Some concerns
+## Part III: Some concerns
 
 ### Network latency
 
