@@ -1,4 +1,4 @@
-# juji hw
+# juji Homework
 
 [Final Website](http://54.202.242.96:5000/#/)
 
